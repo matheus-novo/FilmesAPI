@@ -25,7 +25,7 @@ namespace FilmesAPI.Controllers
             var sessao = _mapper.Map<Sessao>(sessaoDto);
             _context.Sessoes.Add(sessao);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(LerSessaoPorID), new { FilmeId = sessao.FilmeId, CinemaId = sessao.CinemaId }, sessaoDto);
+            return CreatedAtAction(nameof(LerSessaoPorID), new { filmeId = sessao.FilmeId, cinemaId = sessao.CinemaId }, sessao);
         }
 
         [HttpGet]

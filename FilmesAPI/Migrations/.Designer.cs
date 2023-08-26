@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FilmesAPI.Migrations
 {
     [DbContext(typeof(FilmeContext))]
-    [Migration("20230704234946_Filme--Nulo")]
-    partial class FilmeNulo
+    [Migration("20230826182436_Cinema e Filme")]
+    partial class CinemaeFilme
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -99,9 +99,6 @@ namespace FilmesAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("CinemaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.HasKey("FilmeId", "CinemaId");

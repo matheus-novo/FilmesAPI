@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FilmesAPI.Migrations
 {
     [DbContext(typeof(FilmeContext))]
-    [Migration("20230704235457_Filme Nulo")]
-    partial class FilmeNulo
+    [Migration("20230826182911_Filme e Cinema")]
+    partial class FilmeeCinema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,21 +95,15 @@ namespace FilmesAPI.Migrations
 
             modelBuilder.Entity("FilmesAPI.Models.Sessao", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int?>("FilmeId")
                         .HasColumnType("int");
 
                     b.Property<int?>("CinemaId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FilmeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
+                    b.HasKey("FilmeId", "CinemaId");
 
                     b.HasIndex("CinemaId");
-
-                    b.HasIndex("FilmeId");
 
                     b.ToTable("Sessoes");
                 });
@@ -129,11 +123,15 @@ namespace FilmesAPI.Migrations
                 {
                     b.HasOne("FilmesAPI.Models.Cinema", "Cinema")
                         .WithMany("Sessoes")
-                        .HasForeignKey("CinemaId");
+                        .HasForeignKey("CinemaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FilmesAPI.Models.Filme", "Filme")
                         .WithMany("Sessoes")
-                        .HasForeignKey("FilmeId");
+                        .HasForeignKey("FilmeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Cinema");
 
